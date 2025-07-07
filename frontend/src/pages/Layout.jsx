@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
 
 export default function Layout() {
+  const { user } = useContext(AppContext);
+
   return (
     <>
       <header>
@@ -9,14 +13,20 @@ export default function Layout() {
             Home
           </Link>
 
-          <div>
-            <Link to="/register" className="nav-link">
-              Register
-            </Link>
-            <Link to="/login" className="nav-link">
-              Login
-            </Link>
-          </div>
+          {user ? (
+            <div>
+              <p className="nav-link">Logged as: {user.name}</p>
+            </div>
+          ) : (
+            <div>
+              <Link to="/register" className="nav-link">
+                Register
+              </Link>
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
+            </div>
+          )}
         </nav>
       </header>
 
