@@ -36,6 +36,9 @@ export default function Layout() {
           {user ? (
             <div className="flex">
               <p className="nav-link">Welcom back {user.name}</p>
+              <Link to="/create" className="nav-link">
+                New Post
+              </Link>
               <form onSubmit={handleLogout}>
                 <button className="nav-link">Logout</button>
               </form>
