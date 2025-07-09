@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
+
   async function getPosts() {
     const res = await fetch("/api/posts");
     const data = await res.json();
