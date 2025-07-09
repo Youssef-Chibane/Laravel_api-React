@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { AppContext } from "../../context/AppContext";
 
 export default function Show() {
   const { id } = useParams();
+  const { user } = useContext(AppContext);
+
   const [post, setPost] = useState(null);
 
   async function getPost() {
@@ -41,6 +44,17 @@ export default function Show() {
           </div>
           <div className="text-slate-800 leading-relaxed text-lg whitespace-pre-line">
             {post.body}
+
+            {user.id === post.user_id && (
+              <div className="flex items-center justify-end gap-4">
+                <Link
+                  to={`/posts/update/${id}`}
+                  className="bg-green-500 text-white text-sm rounded-lg px-3 py-1"
+                >
+                  Update
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       ) : (
